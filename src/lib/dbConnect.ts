@@ -1,4 +1,3 @@
-import { promises } from "dns";
 import mongoose from "mongoose";
 
 type ConnectionObject = {
@@ -16,12 +15,11 @@ async function dbConnect(): Promise<void> {
   try {
     const db = await mongoose.connect(process.env.MONGODB_URI || "", {});
 
-    console.log(db)
-    conncection.isConnected = db.connections[0].readyState
-    console.log(db.connections)
+    console.log(db);
+    conncection.isConnected = db.connections[0].readyState;
+    console.log(db.connections);
   } catch (error) {
-
-    process.exit(1)
+    process.exit(1);
   }
 }
 
