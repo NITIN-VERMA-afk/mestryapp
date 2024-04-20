@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Connection } from "mongoose";
 
 type ConnectionObject = {
   isConnected?: number;
@@ -13,12 +13,14 @@ async function dbConnect(): Promise<void> {
   }
 
   try {
-    const db = await mongoose.connect(process.env.MONGODB_URI || "", {});
+    const db = await mongoose.connect(process.env.MONGODB_URI || '');
 
     console.log(db);
     conncection.isConnected = db.connections[0].readyState;
-    console.log(db.connections);
+    console.log("DB connection Sucessfully");
   } catch (error) {
+
+    console.log("databse connection failed",error)
     process.exit(1);
   }
 }
